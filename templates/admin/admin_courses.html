@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة الدورات</title>
+    <style>
+        body {
+            font-family: 'Verdana', sans-serif;
+            background-color: #3a3f47;
+            margin: 0;
+            padding: 20px;
+            color: #ffffff;
+        }
+        h1 {
+            color: #61dafb;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 36px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        .course-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .course {
+            background: rgba(58, 63, 71, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .course:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        button {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #ff1a1a;
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 28px;
+            }
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>إدارة الدورات</h1>
+    <div class="course-container">
+        {% for course in courses %}
+            <div class="course">
+                <h2>{{ course.title }}</h2>
+                <img src="{{ course.image_url }}" alt="{{ course.title }}">
+                <p>{{ course.description }}</p>
+                <form action="{{ url_for('delete_course', course_id=course.id) }}" method="POST" style="display:inline;">
+                    <button type="submit">حذف الدورة</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

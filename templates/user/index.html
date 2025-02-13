@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة التعلم - ملف التعريف</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #3a3f47; 
+            margin: 0;
+            padding: 0;
+            color: #ffffff; 
+        }
+
+        header {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        nav {
+            margin: 20px 0;
+        }
+
+        nav a, nav button {
+            margin: 0 15px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        nav button {
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        nav button:hover {
+            font-size: 18px;
+            color: #ff2f0a;
+        }
+
+        nav a:hover {
+            font-size: 18px;
+            color: #ff2f0a;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            background: rgba(58, 63, 71, 0.9); 
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        h1, h2 {
+            color: #61dafb; 
+        }
+
+        .profile {
+            background: rgba(63, 115, 226, 0.7); 
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .profile .prof {
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            transition: transform 0.2s;
+        }
+
+        .profile:hover .prof {
+            transform: scale(1.1);
+        }
+
+        .about {
+            background: #444;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .courses {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-around;
+        }
+
+        .course-card {
+            background: #ffffff; 
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            width: calc(33% - 40px);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .course-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .course-card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .course-card h3 {
+            margin: 10px 0;
+            color: #6a11cb;
+        }
+
+        .course-card p {
+            color: #666;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background: linear-gradient(135deg, #6a11cb, #2575fc); 
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+      
+        .popup {
+            display: none;
+            position: absolute;
+            top: 100px;
+            right: 20px;
+            background: #ffffff;
+            background: linear-gradient(35deg, #6a11cb, #2575fc);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            transform: translateY(-10px);
+            width: 200px; 
+        }
+
+        .popup.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .course-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .course-button {
+            background-color:white;
+            color: #2575fc;
+            font-weight: bold;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            display: block;
+            transition: background-color 0.3s;
+        }
+
+        .course-button:hover {
+            background: linear-gradient(35deg, #6a11cb, #2575fc);
+            color:white;
+        }
+
+        @media (max-width: 768px) {
+            .course-card {
+                width: calc(50% - 40px);
+            }
+            .popup {
+                width: 70%; 
+                right: 5%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .course-card {
+                width: 100%;
+            }
+        }       
+        .course-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start; 
+           padding: 100px 100px 100px 150px;
+           
+            margin: 0 auto;
+        }
+        .course-type {
+            width: 100%;
+            margin-top: 20px;
+            border-bottom: 2px solid #61dafb;
+            padding-bottom: 10px;
+            font-size: 24px;
+            text-align: left;
+        }
+        .course {
+            position: relative;
+            background: rgba(58, 63, 71, 0.9);
+            margin: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            width: 300px; 
+            height: 400px; 
+            overflow: hidden; 
+        }
+        .course:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+        .img {
+            width: 100%; 
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            position: absolute; 
+            top: 0;
+            left: 0; 
+        
+        }
+        .title {
+            position: absolute;
+            bottom: -20px; 
+            left: 0px; 
+            right: 0px; 
+            color: #ffffff; 
+            background: linear-gradient(35deg, #6a11cb, #2575fc);
+            padding: 15px; 
+            border-radius: 5px;
+            transition: transform 0.3s, opacity 0.3s; 
+        }
+        .p {
+            position: absolute;
+            top: -20px;
+            font-size: 20px; 
+            left: 0px;
+            right: 0px; 
+            color: #ffffff;
+            background: linear-gradient(35deg, #6a11cb, #2575fc);
+            padding: 15px; 
+            transition: transform 0.3s, opacity 0.3s;
+        }
+        .course:hover .title {
+            transform: translateY(30px);
+            opacity: 0; 
+        }
+        .course:hover p {
+            transform: translateY(-30px);
+            opacity: 0;
+        }
+        .buttons {
+            position: absolute; 
+            top: 50%;
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            opacity: 0; 
+            transition: opacity 0.3s;
+       display: block;
+       
+        }
+        .course:hover .buttons {
+            opacity: 1;
+        }
+        .button {
+            background: transparent; 
+            border: none;
+            font-size: 30px; 
+            cursor: pointer; 
+            transition: transform 0.3s;
+        }
+        .button:hover {
+            transform: scale(1.2);
+        }
+        .cor{
+            width: 120%;
+            font-weight: bold;
+            font-size: 20px;
+     color: rgb(53, 51, 51);
+        }
+        .new{
+            background:linear-gradient(to right, #6a11cb, #2575fc);
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        {% if current_user.is_authenticated %}
+           <a href="/user/profile">
+            <div class="profile" onclick="togglePopup(event)">
+                <img class="prof" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIs1SC6icyfnxDTbXKTwuDChooVnBrS2jZtw&s" alt="صورة المستخدم">
+        
+            </div>
+           </a>
+        {% endif %}
+        <h1>منصة التعلم</h1>
+        <nav>
+            {% if current_user.is_authenticated %}
+            <a href="APIs">توثيق APIs</a>
+            <a href="/user/contantgroup">تواصل جماعي</a>
+            {% endif %}
+            <a href="/user/login">تسجيل الدخول</a>
+            <button onmouseover="toggleSpecializationPopup(event)">الدورات</button>
+            <a href="/user/about">عن المنصة</a>
+          
+            
+          
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="about">
+            
+       </div>
+
+       <h1 class="new" style="color: white; width: 5%; padding: 10px; margin-left: auto;">الجديد</h1><div class="courses">
+          
+        <div class="course-card">
+           <a href="">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIs1SC6icyfnxDTbXKTwuDChooVnBrS2jZtw&s" class="card-img-top rounded-circle mx-auto mt-3" alt="دورة البرمجة الأساسية">
+            <h3>دورة البرمجة الأساسية</h3>
+            <p>تعلم أساسيات البرمجة بلغة بايثون.</p>
+           </a>
+            </div>
+            <div class="course-card">
+             <a href="">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRe3FzRWX6Igpr-PoNByVOXBq0uPDv2K5xB4Q&s" class="card-img-top rounded-circle mx-auto mt-3" alt="دورة تطوير الويب">
+                <h3>دورة تطوير الويب</h3>
+                <p>ابدأ رحلتك في تطوير الويب باستخدام HTML وCSS وJavaScript.</p>
+             </a>
+            </div>
+            <div class="course-card">
+          <a href="">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlcoceee4zjMCSkE5YGvmfyiUCizi3PzwGVg&s" class="card-img-top rounded-circle mx-auto mt-3" alt="دورة تحليل البيانات">
+            <h3>دورة تحليل البيانات</h3>
+            <p>تعلم كيفية تحليل البيانات باستخدام مكتبات بايثون.</p>
+          </a>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="popup" id="specializationPopup">
+        <center><h3 style="padding:15px ;background-color: #ff2f0a;border-radius: 10px;">[ قائمة متجددة ]</h3></center>
+        <ul class="course-list" style="background-color:rgb(6, 33, 121);padding: 10px;">
+            {% for course_type in unique_course_types %}
+                <li>
+                    <a href="#{{ course_type }}" style="text-decoration: none;font-weight: bold;">
+                        <button class="course-button">
+                            {{ course_type }}
+                        </button>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    
+
+    
+    <div class="course-container" >
+        {% for course_type, courses in courses_by_type.items() %}
+            <h2 class="course-type" id="{{ course_type }}">{{ course_type }}</h2>
+            {% for course in courses %}
+                <div class="course">
+                    <img src="{{ course.image_url }}" alt="{{ course.title }}" class="img">
+                    <h3 class="title">{{ course.title }}</h3>
+                    <p class="p">{{ course.description }}</p>
+                    <div class="buttons">
+                        <h3 class="cor">{{ course.title }}</h3>
+                        <button class="button" onclick="shareCourse('{{ course.title }}', '{{ course.description }}', '{{ course.image_url }}')">🔗</button> 
+                       <button class="button heart-button" onclick="toggleHeart(this)">🤍</button>  
+                    </div>                 
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+
+
+
+    <footer>
+     
+        <p>&copy; 2025 منصة التعلم. جميع الحقوق محفوظة.</p>
+       
+        {% for course_type in unique_course_types %}
+               
+        <a href="#{{ course_type }}" style="text-decoration: none; color: rgb(0, 255, 128);padding: 15px;font-weight: bold;font-size: 20px;" >
+          
+                {{ course_type }}
+            
+        </a>
+    
+{% endfor %}
+
+    </footer>
+
+    <script>
+   function toggleHeart(button) {
+        if (button.textContent === '🤍') {
+            button.textContent = '❤️';
+        } else {
+            button.textContent = '🤍';
+        }
+    }
+    function shareCourse(title, description, imageUrl) {
+        const shareText = `${title}\n${description}\n${imageUrl}`;
+        if (navigator.share) {
+            navigator.share({
+                title: title,
+                text: description,
+                url: imageUrl,
+            })
+            .then(() => console.log('تمت المشاركة بنجاح'))
+            .catch((error) => console.error('خطأ في المشاركة:', error));
+        } else {
+            alert(shareText);
+        }
+    }
+
+
+        function toggleSpecializationPopup(event) {
+            const popup = document.getElementById('specializationPopup');
+            const isDisplayed = popup.classList.contains('show');
+            if (isDisplayed) {
+                popup.classList.remove('show');
+            } else {
+                popup.classList.add('show');
+            }
+
+           
+            popup.style.top = (event.clientY + 10) + 'px';
+            popup.style.left = (event.clientX - 10) + 'px';
+        }
+
+        window.onclick = function(event) {
+            const popup = document.getElementById('specializationPopup');
+            if (event.target !== popup && !popup.contains(event.target) && event.target !== document.querySelector('nav button')) {
+                popup.classList.remove('show');
+            }
+        }
+    </script>
+</body>
+</html>

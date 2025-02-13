@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عن المنصة</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #3a3f47;
+            margin: 0;
+            padding: 0;
+            color: #ffffff;
+        }
+
+        header {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 30px;
+            background: rgba(58, 63, 71, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            animation: slideUp 1.5s ease-in-out;
+        }
+
+        .container h2 {
+            color: #6a11cb;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .container p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .social-icons {
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #6a11cb;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>عن المنصة</h1>
+    </header>
+
+    <div class="container">
+        <h2 style="color: white;">مرحبًا بكم في منصة التعلم!</h2>
+        <p>نحن نقدم مجموعة واسعة من الدورات التعليمية التي تساعدك على تطوير مهاراتك وتحقيق أهدافك التعليمية.</p>
+        <p>تقدم المنصة محتوى متنوعًا يعزز من فرص التعلم الذاتي والتطوير المهني.</p>
+        <p>انضم إلينا اليوم وابدأ رحلتك التعليمية!</p>
+        <a href="tel:967715206725" class="cta-button">انضم الآن <i class="fas fa-arrow-left"></i></a>
+    </div>
+
+    <footer>
+        <div class="social-icons">
+            <a href=""><i class="fab fa-facebook-f"></i></a>
+            <a href=""><i class="fab fa-twitter"></i></a>
+            <a href=""><i class="fab fa-instagram"></i></a>
+            <a href=""><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <p>&copy; 2025 منصة التعلم. جميع الحقوق محفوظة.</p>
+    </footer>
+</body>
+</html>

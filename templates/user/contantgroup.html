@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تواصل جماعي</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #3a3f47; 
+            margin: 0;
+            padding: 0;
+            color: #ffffff; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 600px;
+            height: 90vh;
+            border-radius: 10px;
+            background-color: rgba(58, 63, 71, 0.9);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+        .header {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            padding-top: 18px;
+            padding-left: 18px;
+            text-align: right;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            font-size: 2.5em;
+        }
+        .messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            border-bottom: 1px solid #ccc;
+            margin: 0 10px;
+        }
+        .message {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+            padding: 12px;
+            border-radius: 10px;
+            max-width: 70%;
+            clear: both;
+            direction: rtl;
+            position: relative;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        .message.sent {
+            background-color: #1e1e1e;
+            margin-left: auto;
+        }
+        .message.received {
+            background-color: #d32f2f;
+            margin-right: auto; 
+        }
+        .user-initial {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #7289da; 
+            color: white; 
+            display: flex;
+            align-items: center; 
+            justify-content: center; 
+            font-size: 1.2em; 
+            margin-left: 10px; 
+        }
+        .delete-button {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px;
+            font-size: 0.8em;
+            margin-top: 12px;
+            width: 60px;
+            transition: background-color 0.3s;
+        }
+        .delete-button:hover {
+            background-color: #e60000;
+        }
+        .input-area {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #ccc; 
+            background-color: rgba(58, 63, 71, 0.9);
+        }
+        textarea {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+            font-size: 1em;
+            direction: rtl; 
+            margin-left: 5px;
+            background-color: #fff;
+            color: #000; 
+        }
+        button {
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: #25D366;
+            color: white;
+            cursor: pointer;
+            margin-left: 10px;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #1ebc5c;
+        }
+   
+        
+    </style>
+</head>
+<body>
+   
+    <div class="container">
+        <a class="navbar-brand" style="color: rgb(233, 223, 223);text-decoration:none;font-size: 25px;padding-right: 12px;text-align: right;" href="/">الواجهة الرئيسية</a>  
+       
+        <div class="header">
+            <div style="text-align: left; font-size: 20px; font-weight: bold;">تواصل</div>💭
+        
+
+        </div>
+        <div class="messages" id="messages">
+            {% for message in messages %}
+                <div class="message {% if message.user_id == current_user.id %}sent{% else %}received{% endif %}">
+                    <div class="user-initial">
+                        {% if message.user %}
+                            {{ message.user.username[0] }} 
+                        {% else %}
+                            U
+                        {% endif %}
+                    </div>
+                    <div style="flex: 1; display: flex; flex-direction: column;">
+                        <div style="flex: 1;"> 
+                            {{ message.content }}
+                        </div>
+                        {% if message.user_id == current_user.id %}
+                            <div style="display: flex; align-items: center; justify-content: flex-start;">
+                                <form action="{{ url_for('delete_message', message_id=message.id) }}" method="POST" style="display:inline;">
+                                    <button type="submit" class="delete-button">حذف</button>
+                                </form>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="input-area">
+            <form method="POST" style="width: 100%; display: flex;">
+                <textarea name="message" rows="2" required></textarea>
+                <button type="submit">إرسال</button>
+            </form>
+        </div>
+   
+
+    <script>
+        const messagesDiv = document.getElementById('messages');
+
+        function scrollToBottom() {
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        window.onload = function() {
+            scrollToBottom();
+        };
+
+        function refreshMessages() {
+            scrollToBottom();
+        }
+
+        setInterval(refreshMessages, 5000);
+    </script>
+</body>
+</html>

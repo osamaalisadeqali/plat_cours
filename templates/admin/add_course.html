@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إضافة كورس</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #3a3f47; 
+            margin: 0;
+            padding: 20px;
+            color: #ffffff; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 50vh; 
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            margin: auto;
+            padding: 50px;
+            background: rgba(58, 63, 71, 0.9); 
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        h2 {
+            text-align: center;
+            color: #61dafb;
+            margin-bottom: 20px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            background: #ffffff;
+            color: #333; 
+        }
+
+        input:focus, textarea:focus {
+            border-color: #6a11cb;
+            outline: none;
+        }
+
+        button {
+            background-color: #6a11cb; 
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 12px;
+        }
+
+        button:hover {
+            background-color: #2575fc;
+        }
+
+      
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            input, textarea {
+                font-size: 14px;
+            }
+
+            button {
+                font-size: 20px;
+                margin-top: 12px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            h2 {
+                font-size: 20px;
+            }
+
+            input, textarea {
+                font-size: 12px;
+                padding: 10px;
+            }
+
+            button {
+                margin-top: 12px;
+                font-size: 20px;
+                padding: 10px; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>إضافة كورس جديد</h2>
+        <form method="POST">
+            <input type="text" name="title" placeholder="اسم الكورس" required>
+            <textarea name="description" placeholder="وصف الكورس" required></textarea>
+            <input type="text" name="image_url" placeholder="رابط صورة الكورس" required>
+            <input type="text" name="course_type" placeholder="نوع الدورة" required> 
+            <button type="submit">إضافة الكورس</button>
+        </form>
+    </div>
+</body>
+</html>

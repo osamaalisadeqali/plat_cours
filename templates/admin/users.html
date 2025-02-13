@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المستخدمون المسجلون</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #3a3f47;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            margin: auto;
+            background: rgba(58, 63, 71, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            color: #ffffff;
+        }
+
+        h2 {
+            text-align: center;
+            color: #61dafb;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #6a11cb;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .copy-button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .copy-button:hover {
+            background-color: #218838;
+        }
+
+        input[type="submit"] {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #c82333;
+        }
+
+        canvas {
+            max-width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>المستخدمون المسجلون</h2>
+        
+        <table>
+            <tr>
+                <th>اسم المستخدم</th>
+                <th>البريد الإلكتروني</th>
+                <th>كلمة المرور</th>
+                <th>تاريخ التسجيل</th>
+                <th>الإجراءات</th>
+            </tr>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    <span id="password-{{ user.id }}" class="password-brief">{{ user.password[:4] }}***</span>
+                    <button class="copy-button" onclick="copyPassword('{{ user.password }}')">نسخ</button>
+                </td>
+                <td>{{ user.created_at }}</td>
+                <td>
+                    <form action="{{ url_for('delete_user', user_id=user.id) }}" method="POST" style="display:inline;">
+                        <input type="submit" value="حذف" onclick="return confirm('هل أنت متأكد أنك تريد حذف هذا المستخدم؟');">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <canvas id="dailyChart"></canvas>
+        <canvas id="monthlyChart"></canvas>
+        <canvas id="yearlyChart"></canvas>
+        
+    </div>
+
+    <script>
+        function copyPassword(password) {
+            navigator.clipboard.writeText(password).then(function() {
+                alert('تم نسخ كلمة المرور إلى الحافظة!');
+            }, function(err) {
+                alert('فشل في نسخ كلمة المرور: ', err);
+            });
+        }
+
+        // بيانات العينة لعدد المشتركين
+        const dailyData = [5, 3, 4, 7, 6, 8, 10]; // عدد المشتركين في الأيام
+        const monthlyData = [20, 30, 25, 35, 40, 50, 45]; // عدد المشتركين في الأشهر
+        const yearlyData = [200, 250, 300, 350, 400, 450, 500]; // عدد المشتركين في السنوات
+
+        const dailyCtx = document.getElementById('dailyChart').getContext('2d');
+        new Chart(dailyCtx, {
+            type: 'line',
+            data: {
+                labels: ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'],
+                datasets: [{
+                    label: 'عدد المشتركين اليومي',
+                    data: dailyData,
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        const monthlyCtx = document.getElementById('monthlyChart').getContext('2d');
+        new Chart(monthlyCtx, {
+            type: 'bar',
+            data: {
+                labels: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو'],
+                datasets: [{
+                    label: 'عدد المشتركين الشهري',
+                    data: monthlyData,
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        const yearlyCtx = document.getElementById('yearlyChart').getContext('2d');
+        new Chart(yearlyCtx, {
+            type: 'bar',
+            data: {
+                labels: ['2021', '2022', '2023', '2024', '2025'],
+                datasets: [{
+                    label: 'عدد المشتركين السنوي',
+                    data: yearlyData,
+                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
